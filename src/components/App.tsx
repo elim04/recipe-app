@@ -15,6 +15,12 @@ const App: React.FC = () => {
     setRecipes((prevRecipes: Recipe[]) => [...prevRecipes, recipe]);
   };
 
+  // const deleteRecipe = (recipeID: string) => {
+  //   setRecipes((prevRecipes: Recipe[]) => {
+  //     return prevRecipes.filter((recipe) => recipe.id !== recipeID);
+  //   });
+  // };
+
   return (
     <div className="App">
       <RecipeList recipesData={recipes} onAddRecipe={onAddRecipe} />
