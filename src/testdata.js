@@ -1,6 +1,7 @@
 //test data for recipes
 export const data = [
   {
+    id: 1,
     name: "Cauliflower Tacos With Avocado Crema",
     servingSize: 4,
     cookware: [
@@ -48,6 +49,7 @@ export const data = [
     ],
   },
   {
+    id: 2,
     name: "Cauliflower Tacos With Avocado Crema",
     servingSize: 4,
     cookware: [
@@ -95,6 +97,7 @@ export const data = [
     ],
   },
   {
+    id: 3,
     name: "Cauliflower Tacos With Avocado Crema",
     servingSize: 4,
     cookware: [
