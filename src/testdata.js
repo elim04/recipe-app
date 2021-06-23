@@ -21,7 +21,7 @@ export const data = [
       { name: "oregano", amount: 1, measurement: "tbsp" },
       {
         name: "hot sauce",
-        amount: null,
+        amount: 1,
         measurement: "amount of your choosing",
       },
       { name: "corn tortillas", amount: 8, measurement: "each" },
@@ -33,7 +33,7 @@ export const data = [
       { name: "red cabbage, chopped", amount: 0.25, measurement: "head" },
       { name: "salt", amount: 1, measurement: "tsp" },
       { name: "black pepper", amount: 1, measurement: "tsp" },
-      { name: "cooking oil - spray", amount: null, measurement: null },
+      { name: "cooking oil - spray", amount: 1, measurement: "can" },
     ],
     instructions: [
       "Pre heat oven to 425F.",
@@ -68,7 +68,7 @@ export const data = [
       { name: "oregano", amount: 1, measurement: "tbsp" },
       {
         name: "hot sauce",
-        amount: null,
+        amount: 1,
         measurement: "amount of your choosing",
       },
       { name: "corn tortillas", amount: 8, measurement: "each" },
@@ -80,7 +80,7 @@ export const data = [
       { name: "red cabbage, chopped", amount: 0.25, measurement: "head" },
       { name: "salt", amount: 1, measurement: "tsp" },
       { name: "black pepper", amount: 1, measurement: "tsp" },
-      { name: "cooking oil - spray", amount: null, measurement: null },
+      { name: "cooking oil - spray", amount: 1, measurement: "can" },
     ],
     instructions: [
       "Pre heat oven to 425F.",
@@ -115,7 +115,7 @@ export const data = [
       { name: "oregano", amount: 1, measurement: "tbsp" },
       {
         name: "hot sauce",
-        amount: null,
+        amount: 1,
         measurement: "amount of your choosing",
       },
       { name: "corn tortillas", amount: 8, measurement: "each" },
@@ -127,7 +127,7 @@ export const data = [
       { name: "red cabbage, chopped", amount: 0.25, measurement: "head" },
       { name: "salt", amount: 1, measurement: "tsp" },
       { name: "black pepper", amount: 1, measurement: "tsp" },
-      { name: "cooking oil - spray", amount: null, measurement: null },
+      { name: "cooking oil - spray", amount: 1, measurement: "can" },
     ],
     instructions: [
       "Pre heat oven to 425F.",
