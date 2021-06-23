@@ -1,20 +1,24 @@
 import React from "react";
 import RecipeListItem from "./RecipeListItem";
 import { Recipe } from "../recipe.model";
+
+//describes props for this component
 interface RecipeListProps {
   recipesData: Recipe[];
-  onAddRecipe: (recipe: any) => void;
+  onAddRecipe: (recipe: Recipe) => void;
 }
 
 const RecipeList: React.FC<RecipeListProps> = (props) => {
   return (
     <div>
       {props.recipesData.map((recipeItem) => {
-        return <div>{recipeItem.name}</div>;
+        return (
+          <RecipeListItem
+            recipeName={recipeItem.name}
+            servingSize={recipeItem.servingSize}
+          />
+        );
       })}
-      <RecipeListItem />
-      <RecipeListItem />
-      <RecipeListItem />
     </div>
   );
 };
