@@ -14,6 +14,7 @@ const RecipeList: React.FC<RecipeListProps> = (props) => {
       {props.recipesData.map((recipeItem) => {
         return (
           <RecipeListItem
+            key={recipeItem.id}
             recipeName={recipeItem.name}
             servingSize={recipeItem.servingSize}
           />
