@@ -1,7 +1,7 @@
 import React from "react";
 
 import { makeStyles } from "@material-ui/core";
-import { Card, CardActions, CardContent } from "@material-ui/core";
+import { Card, CardContent } from "@material-ui/core";
 
 interface RecipeListItemProps {
   recipeName: string;
