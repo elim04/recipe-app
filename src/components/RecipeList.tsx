@@ -8,6 +8,7 @@ import { Card, CardContent } from "@material-ui/core";
 interface RecipeListProps {
   recipesData: Recipe[];
   onAddRecipe: (recipe: Recipe) => void;
+  deleteRecipe: (recipe: number) => void;
 }
 
 const useStyles = makeStyles({
@@ -18,12 +19,16 @@ const useStyles = makeStyles({
   },
 });
 
-const RecipeList: React.FC<RecipeListProps> = (props) => {
+const RecipeList: React.FC<RecipeListProps> = ({
+  recipesData,
+  onAddRecipe,
+  deleteRecipe,
+}) => {
   const classes = useStyles();
 
   return (
     <div>
-      {props.recipesData.map((recipeItem) => {
+      {recipesData.map((recipeItem) => {
         return (
           <Card className={classes.root}>
             <CardContent>
@@ -32,6 +37,9 @@ const RecipeList: React.FC<RecipeListProps> = (props) => {
                 recipeName={recipeItem.name}
                 servingSize={recipeItem.servingSize}
               />
+              <button onClick={deleteRecipe.bind(null, recipeItem.id)}>
+                Delete
+              </button>
             </CardContent>
           </Card>
         );
