@@ -50,7 +50,7 @@ export const data = [
   },
   {
     id: 2,
-    name: "Cauliflower Tacos With Avocado Crema",
+    name: "Sour Dough Pizza",
     servingSize: 4,
     cookware: [
       "large mixing bowl",
@@ -98,7 +98,7 @@ export const data = [
   },
   {
     id: 3,
-    name: "Cauliflower Tacos With Avocado Crema",
+    name: "Paneer Makhani",
     servingSize: 4,
     cookware: [
       "large mixing bowl",
