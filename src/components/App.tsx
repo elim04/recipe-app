@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+
+import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
+
 import RecipeList from "./RecipeList";
+import NewRecipe from "./NewRecipe";
 import { Recipe } from "../recipe.model";
 
 import "./App.css";
@@ -22,13 +26,22 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
-      <RecipeList
-        recipesData={recipes}
-        onAddRecipe={onAddRecipe}
-        deleteRecipe={deleteRecipe}
-      />
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <RecipeList
+              recipesData={recipes}
+              onAddRecipe={onAddRecipe}
+              deleteRecipe={deleteRecipe}
+            />
+          </Route>
+          <Route path="/newrecipe">
+            <NewRecipe />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 };
 
