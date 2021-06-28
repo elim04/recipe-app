@@ -1,7 +1,6 @@
 //test data for recipes
-export const data = [
-  {
-    id: 1,
+export const data = {
+  1: {
     name: "Cauliflower Tacos With Avocado Crema",
     servingSize: 4,
     cookware: [
@@ -48,8 +47,7 @@ export const data = [
       "Take cauliflower out of oven and assemble!",
     ],
   },
-  {
-    id: 2,
+  2: {
     name: "Sour Dough Pizza",
     servingSize: 4,
     cookware: [
@@ -96,8 +94,7 @@ export const data = [
       "Take cauliflower out of oven and assemble!",
     ],
   },
-  {
-    id: 3,
+  3: {
     name: "Paneer Makhani",
     servingSize: 4,
     cookware: [
@@ -144,4 +141,4 @@ export const data = [
       "Take cauliflower out of oven and assemble!",
     ],
   },
-];
+};
