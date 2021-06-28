@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+
+import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
+
 import RecipeList from "./RecipeList";
+import NewRecipe from "./NewRecipe";
 import { Recipe } from "../recipe.model";
+import { RecipeListObj } from "../recipeList.model";
 
 import "./App.css";
 
@@ -8,17 +13,42 @@ import "./App.css";
 import { data } from "../testdata";
 
 const App: React.FC = () => {
-  //need to fix the any types
-  const [recipes, setRecipes] = useState<any>(data);
+  const [recipes, setRecipes] = useState<RecipeListObj>(data);
 
   const onAddRecipe = (recipe: Recipe) => {
-    setRecipes((prevRecipes: Recipe[]) => [...prevRecipes, recipe]);
+    let recipeKey = Math.floor(Math.random() * 100);
+    setRecipes((prevRecipes: RecipeListObj) => {
+      return {
+        ...prevRecipes,
+        recipeKey: recipe,
+      };
+    });
+  };
+
+  const deleteRecipe = (recipeID: number) => {
+    let { [recipeID]: omit, ...res } = recipes;
+    setRecipes(res);
   };
 
   return (
-    <div className="App">
-      <RecipeList recipesData={recipes} onAddRecipe={onAddRecipe} />
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <RecipeList recipesData={recipes} deleteRecipe={deleteRecipe} />
+            <div>
+              <h3>Add new recipe!</h3>
+              <Link to="/newrecipe">
+                <button>Add Recipe</button>
+              </Link>
+            </div>
+          </Route>
+          <Route path="/newrecipe">
+            <NewRecipe onAddRecipe={onAddRecipe} />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 };
 

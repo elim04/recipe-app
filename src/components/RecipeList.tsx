@@ -1,20 +1,60 @@
 import React from "react";
 import RecipeListItem from "./RecipeListItem";
-import { Recipe } from "../recipe.model";
+import { RecipeListObj } from "../recipeList.model";
+import { makeStyles } from "@material-ui/core";
+import { Card, CardContent, Button } from "@material-ui/core";
+
+//describes props for this component
 interface RecipeListProps {
-  recipesData: Recipe[];
-  onAddRecipe: (recipe: any) => void;
+  recipesData: RecipeListObj;
+  deleteRecipe: (recipe: number) => void;
 }
 
-const RecipeList: React.FC<RecipeListProps> = (props) => {
+const useStyles = makeStyles({
+  root: {
+    width: 275,
+    margin: 10,
+    backgroundColor: "rgb(221 227 255 / 87%)",
+  },
+  button: {
+    backgroundColor: "white",
+  },
+});
+
+const RecipeList: React.FC<RecipeListProps> = ({
+  recipesData,
+  deleteRecipe,
+}) => {
+  const classes = useStyles();
+
+  const recipesArray = Object.keys(recipesData);
+
   return (
     <div>
-      {props.recipesData.map((recipeItem) => {
-        return <div>{recipeItem.name}</div>;
+      {recipesArray.map((recipeItem) => {
+        //convert string to number for recipedata id to search for right recipe
+        let recipeItemId = parseInt(recipeItem, 10);
+
+        return (
+          <Card key={recipeItemId} className={classes.root}>
+            <CardContent>
+              <RecipeListItem
+                key={recipeItemId}
+                recipeName={recipesData[recipeItemId]["name"]}
+                servingSize={recipesData[recipeItemId]["servingSize"]}
+              />
+              <Button
+                className={classes.button}
+                variant="outlined"
+                size="small"
+                onClick={deleteRecipe.bind(null, recipeItemId)}
+              >
+                Delete
+              </Button>
+            </CardContent>
+          </Card>
+        );
       })}
-      <RecipeListItem />
-      <RecipeListItem />
-      <RecipeListItem />
     </div>
   );
 };
