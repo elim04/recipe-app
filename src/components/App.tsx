@@ -12,17 +12,18 @@ import "./App.css";
 import { data } from "../testdata";
 
 const App: React.FC = () => {
-  //need to fix the any stypes
   const [recipes, setRecipes] = useState<any>(data);
+  console.log(recipes);
 
   const onAddRecipe = (recipe: Recipe) => {
-    setRecipes((prevRecipes: Recipe[]) => [...prevRecipes, recipe]);
+    // let recipeKey = Math.floor(Math.random()*100);
+    // setRecipes((prevRecipes) => {...prevRecipes, prevRecipes[recipeKey] = recipe});
   };
 
   const deleteRecipe = (recipeID: number) => {
-    setRecipes((prevRecipes: Recipe[]) => {
-      return prevRecipes.filter((recipe) => recipe.id !== recipeID);
-    });
+    // setRecipes((prevRecipes: Recipe[]) => {
+    //   return prevRecipes.filter((recipe) => recipe.id !== recipeID);
+    // });
   };
 
   return (
@@ -30,14 +31,16 @@ const App: React.FC = () => {
       <div className="App">
         <Switch>
           <Route exact path="/">
-            <RecipeList
-              recipesData={recipes}
-              onAddRecipe={onAddRecipe}
-              deleteRecipe={deleteRecipe}
-            />
+            <RecipeList recipesData={recipes} deleteRecipe={deleteRecipe} />
+            <div>
+              <h3>Add new recipe!</h3>
+              <Link to="/newrecipe">
+                <button>Add Recipe</button>
+              </Link>
+            </div>
           </Route>
           <Route path="/newrecipe">
-            <NewRecipe />
+            <NewRecipe onAddRecipe={onAddRecipe} />
           </Route>
         </Switch>
       </div>

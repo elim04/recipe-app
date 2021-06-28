@@ -7,7 +7,6 @@ import { Card, CardContent, Button } from "@material-ui/core";
 //describes props for this component
 interface RecipeListProps {
   recipesData: Recipe[];
-  onAddRecipe: (recipe: Recipe) => void;
   deleteRecipe: (recipe: number) => void;
 }
 
@@ -24,27 +23,31 @@ const useStyles = makeStyles({
 
 const RecipeList: React.FC<RecipeListProps> = ({
   recipesData,
-  onAddRecipe,
   deleteRecipe,
 }) => {
   const classes = useStyles();
 
+  const recipesArray = Object.keys(recipesData);
+
   return (
     <div>
-      {recipesData.map((recipeItem) => {
+      {recipesArray.map((recipeItem) => {
+        //convert string to number for recipedata id to search for right recipe
+        let recipeItemId = parseInt(recipeItem, 10);
+
         return (
-          <Card className={classes.root}>
+          <Card key={recipeItemId} className={classes.root}>
             <CardContent>
               <RecipeListItem
-                key={recipeItem.id}
-                recipeName={recipeItem.name}
-                servingSize={recipeItem.servingSize}
+                key={recipeItemId}
+                recipeName={recipesData[recipeItemId]["name"]}
+                servingSize={recipesData[recipeItemId]["servingSize"]}
               />
               <Button
                 className={classes.button}
                 variant="outlined"
                 size="small"
-                onClick={deleteRecipe.bind(null, recipeItem.id)}
+                onClick={deleteRecipe.bind(null, recipeItemId)}
               >
                 Delete
               </Button>
