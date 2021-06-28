@@ -3,6 +3,12 @@ export interface Recipe {
   name: string;
   servingSize: number;
   cookware: string[];
-  ingredients: [{ name: string; amount: number; measurement: string }];
+  ingredients: Ingredient[];
   instructions: string[];
+}
+
+interface Ingredient {
+  name: string;
+  amount: number;
+  measurement: string;
 }
