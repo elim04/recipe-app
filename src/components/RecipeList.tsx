@@ -1,12 +1,12 @@
 import React from "react";
 import RecipeListItem from "./RecipeListItem";
-import { Recipe } from "../recipe.model";
+import { RecipeListObj } from "../recipeList.model";
 import { makeStyles } from "@material-ui/core";
 import { Card, CardContent, Button } from "@material-ui/core";
 
 //describes props for this component
 interface RecipeListProps {
-  recipesData: Recipe[];
+  recipesData: RecipeListObj;
   deleteRecipe: (recipe: number) => void;
 }
 
