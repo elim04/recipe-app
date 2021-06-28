@@ -1,5 +1,4 @@
 export interface Recipe {
-  id: number;
   name: string;
   servingSize: number;
   cookware: string[];
