@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
 
 import RecipeList from "./RecipeList";
-import NewRecipe from "./NewRecipe";
+import NewRecipe from "./NewRecipe/NewRecipe";
+import RecipeCard from "./RecipeCard/RecipeCard";
 import { Recipe } from "../recipe.model";
 import { RecipeListObj } from "../recipeList.model";
 
@@ -16,7 +17,7 @@ const App: React.FC = () => {
   const [recipes, setRecipes] = useState<RecipeListObj>(data);
 
   const onAddRecipe = (recipe: Recipe) => {
-    let recipeKey = Math.floor(Math.random() * 100);
+    let recipeKey = Math.floor(Math.random() * 10000);
     setRecipes((prevRecipes: RecipeListObj) => {
       return {
         ...prevRecipes,
@@ -45,6 +46,9 @@ const App: React.FC = () => {
           </Route>
           <Route path="/newrecipe">
             <NewRecipe onAddRecipe={onAddRecipe} />
+          </Route>
+          <Route path="/recipe/:recipe_id">
+            <RecipeCard recipesData={recipes} />
           </Route>
         </Switch>
       </div>
