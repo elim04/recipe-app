@@ -3,6 +3,7 @@ import RecipeListItem from "./RecipeListItem";
 import { RecipeListObj } from "../recipeList.model";
 import { makeStyles } from "@material-ui/core";
 import { Card, CardContent, Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 //describes props for this component
 interface RecipeListProps {
@@ -51,6 +52,15 @@ const RecipeList: React.FC<RecipeListProps> = ({
               >
                 Delete
               </Button>
+              <Link to={`/recipe/${recipeItemId}`}>
+                <Button
+                  className={classes.button}
+                  variant="outlined"
+                  size="small"
+                >
+                  View
+                </Button>
+              </Link>
             </CardContent>
           </Card>
         );
