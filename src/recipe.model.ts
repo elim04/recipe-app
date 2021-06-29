@@ -6,7 +6,7 @@ export interface Recipe {
   instructions: string[];
 }
 
-interface Ingredient {
+export interface Ingredient {
   name: string;
   amount: number;
   measurement: string;
