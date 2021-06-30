@@ -1,39 +1,38 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { TextField, Button } from "@material-ui/core";
-import { useState } from "react";
 
 import "./Form.css";
-interface Inputs {
+
+type IngredientFormValues = {
   name: string;
+  cookware: string[];
   servingSize: number;
-  cookware: string;
-  ingredient: string;
-  measurement: string;
-  amount: number;
-  instruction: string;
-}
+  ingredient: {
+    name: string;
+    amount: number;
+    measurement: string;
+  }[];
+};
 
 const Form = () => {
-  //state for dynamic form to add ingredients, cookware and instructions
-
-  const blankIngredient = { name: "", amount: null, measurement: "" };
-
-  const [ingredientState, setIngredientState] = useState([
-    { ...blankIngredient },
-  ]);
-
-  const addIngredient = () => {
-    setIngredientState([...ingredientState, { ...blankIngredient }]);
-  };
   //react form hook implementation
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors },
-  } = useForm();
+  } = useForm<IngredientFormValues>({
+    defaultValues: {
+      ingredient: [{ name: "test-ingredient", amount: 1, measurement: "cup" }],
+    },
+  });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const { fields, append, remove } = useFieldArray({
+    name: "ingredient",
+    control,
+  });
+
+  const onSubmit = (data: IngredientFormValues) => console.log(data);
 
   return (
     <div>
@@ -53,36 +52,40 @@ const Form = () => {
           {...register("servingSize", { required: true, min: 1 })}
         />
         {errors.servingSize && <span>This field is required</span>}
-        {ingredientState.map((val, index) => {
-          const ingredientId = `name-${index}`;
-          const amountId = `amount-${index}`;
-          const measurementId = `measurement-${index}`;
-
+        {fields.map((field, index) => {
           return (
-            <div key={`input-${index}`}>
+            <div key={field.id}>
               <TextField
                 id="outlined-basic"
                 label="Ingredient Name"
                 variant="outlined"
-                {...register("ingredient")}
+                type="text"
+                {...register(`ingredient.${index}.name` as const)}
               />
               <TextField
                 id="outlined-basic"
                 label="Amount"
                 variant="outlined"
                 type="number"
-                {...register("amount")}
+                {...register(`ingredient.${index}.amount`)}
               />
               <TextField
                 id="outlined-basic"
                 label="Measurement"
                 variant="outlined"
-                {...register("measurement")}
+                {...register(`ingredient.${index}.measurement`)}
               />
+              <Button type="button" onClick={() => remove(index)}>
+                Remove
+              </Button>
             </div>
           );
         })}
-        <Button onClick={addIngredient}>Add New Ingredient</Button>
+        <Button
+          onClick={() => append({ name: "", amount: 0, measurement: "" })}
+        >
+          Add New Ingredient
+        </Button>
         <Button type="submit">Submit</Button>
       </form>
     </div>
