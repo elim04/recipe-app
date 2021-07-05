@@ -17,6 +17,7 @@ type IngredientFormValues = {
     measurement: string;
   }[];
   cookware: Array<Name>;
+  instructions: Array<Name>;
 };
 
 const Form = () => {
@@ -47,6 +48,13 @@ const Form = () => {
     name: "ingredient",
     control,
   });
+
+  //for dynamic instruction form
+  const {
+    fields: instructionFields,
+    append: instructionAppend,
+    remove: instructionRemove,
+  } = useFieldArray({ name: "instructions", control });
 
   const onSubmit = (data: IngredientFormValues) => console.log(data);
 
@@ -133,6 +141,31 @@ const Form = () => {
           Add New Ingredient
         </Button>
         <h3>INSTRUCTIONS</h3>
+        <ol>
+          {instructionFields.map((field, index) => {
+            return (
+              <div key={field.id}>
+                <li>
+                  <TextField
+                    id="outlined-basic"
+                    label="Instruction Step"
+                    variant="outlined"
+                    {...register(`instructions.${index}.name`)}
+                  />
+                  <Button
+                    type="button"
+                    onClick={() => instructionRemove(index)}
+                  >
+                    Remove
+                  </Button>
+                </li>
+              </div>
+            );
+          })}
+        </ol>
+        <Button type="button" onClick={() => instructionAppend({ name: "" })}>
+          Add Instruction Step
+        </Button>
         <Button type="submit">Submit</Button>
       </form>
       <Button type="button" onClick={handleClickHome}>
