@@ -86,9 +86,15 @@ const Form = () => {
                 type="text"
                 {...register(`cookware.${index}.name` as const)}
               />
+              <Button type="button" onClick={() => cookwareRemove(index)}>
+                Remove
+              </Button>
             </div>
           );
         })}
+        <Button type="button" onClick={() => cookwareAppend({ name: "" })}>
+          Add Cookware Utensil
+        </Button>
         <h3>INGREDIENTS</h3>
         {ingredientFields.map((field, index) => {
           return (
