@@ -1,5 +1,6 @@
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { TextField, Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 import "./Form.css";
 
@@ -34,6 +35,13 @@ const Form = () => {
 
   const onSubmit = (data: IngredientFormValues) => console.log(data);
 
+  //handle home button
+  let history = useHistory();
+
+  function handleClickHome() {
+    history.push("/");
+  }
+
   return (
     <div>
       <form className="new-recipe-form" onSubmit={handleSubmit(onSubmit)}>
@@ -52,6 +60,7 @@ const Form = () => {
           {...register("servingSize", { required: true, min: 1 })}
         />
         {errors.servingSize && <span>This field is required</span>}
+
         {fields.map((field, index) => {
           return (
             <div key={field.id}>
@@ -88,6 +97,9 @@ const Form = () => {
         </Button>
         <Button type="submit">Submit</Button>
       </form>
+      <Button type="button" onClick={handleClickHome}>
+        Go back Home
+      </Button>
     </div>
   );
 };
