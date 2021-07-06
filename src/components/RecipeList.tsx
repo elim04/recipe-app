@@ -29,6 +29,7 @@ const RecipeList: React.FC<RecipeListProps> = ({
   const classes = useStyles();
 
   const recipesArray = Object.keys(recipesData);
+  console.log(recipesArray);
 
   return (
     <div>
