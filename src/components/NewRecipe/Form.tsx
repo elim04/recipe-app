@@ -1,8 +1,12 @@
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { TextField, Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-
+import { Recipe } from "../../recipe.model";
 import "./Form.css";
+
+type FormProps = {
+  onAddRecipe: (recipe: Recipe) => void;
+};
 
 type Name = {
   name: string;
@@ -20,7 +24,7 @@ type IngredientFormValues = {
   instructions: Array<Name>;
 };
 
-const Form = () => {
+const Form: React.FC<FormProps> = ({ onAddRecipe }) => {
   //react form hook implementation
   const {
     register,
@@ -56,9 +60,27 @@ const Form = () => {
     remove: instructionRemove,
   } = useFieldArray({ name: "instructions", control });
 
-  const onSubmit = (data: IngredientFormValues) => console.log(data);
+  const onSubmit = (data: IngredientFormValues) => {
+    const parsedCookware = data.cookware.map(
+      (cookwareItem) => cookwareItem.name
+    );
 
-  //handle home button
+    const parsedinstructions = data.instructions.map(
+      (instructionItem) => instructionItem.name
+    );
+
+    const recipeToAdd = {
+      name: data.name,
+      servingSize: data.servingSize,
+      cookware: parsedCookware,
+      ingredients: data.ingredient,
+      instructions: parsedinstructions,
+    };
+
+    onAddRecipe(recipeToAdd);
+  };
+
+  //handle home button click
   let history = useHistory();
 
   function handleClickHome() {
@@ -112,21 +134,29 @@ const Form = () => {
                 label="Ingredient Name"
                 variant="outlined"
                 type="text"
-                {...register(`ingredient.${index}.name` as const)}
+                {...register(`ingredient.${index}.name` as const, {
+                  required: true,
+                })}
               />
+              {errors.ingredient && <span>This field is required</span>}
+
               <TextField
                 id="outlined-basic"
                 label="Amount"
                 variant="outlined"
                 type="number"
-                {...register(`ingredient.${index}.amount`)}
+                {...register(`ingredient.${index}.amount`, { required: true })}
               />
+              {errors.ingredient && <span>This field is required</span>}
               <TextField
                 id="outlined-basic"
                 label="Measurement"
                 variant="outlined"
-                {...register(`ingredient.${index}.measurement`)}
+                {...register(`ingredient.${index}.measurement`, {
+                  required: true,
+                })}
               />
+              {errors.ingredient && <span>This field is required</span>}
               <Button type="button" onClick={() => ingredientRemove(index)}>
                 Remove
               </Button>
