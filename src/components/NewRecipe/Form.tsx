@@ -79,7 +79,7 @@ const Form: React.FC<FormProps> = ({ onAddRecipe }) => {
     };
 
     onAddRecipe(recipeToAdd);
-    console.log(recipeToAdd);
+
     reset();
   };
 
