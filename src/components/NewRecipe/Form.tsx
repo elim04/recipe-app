@@ -29,6 +29,7 @@ const Form: React.FC<FormProps> = ({ onAddRecipe }) => {
   const {
     register,
     handleSubmit,
+    reset,
     control,
     formState: { errors },
   } = useForm<IngredientFormValues>({
@@ -78,6 +79,8 @@ const Form: React.FC<FormProps> = ({ onAddRecipe }) => {
     };
 
     onAddRecipe(recipeToAdd);
+    console.log(recipeToAdd);
+    reset();
   };
 
   //handle home button click
