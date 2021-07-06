@@ -13,7 +13,7 @@ const NewRecipe: React.FC<NewRecipeProps> = ({ onAddRecipe }) => {
   return (
     <div>
       <p>Add New Recipe</p>
-      <Form />
+      <Form onAddRecipe={onAddRecipe} />
     </div>
   );
 };
