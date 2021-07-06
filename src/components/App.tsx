@@ -18,7 +18,7 @@ const App: React.FC = () => {
 
   const onAddRecipe = (recipe: Recipe) => {
     let recipeKey = Math.floor(Math.random() * 10000);
-    console.log(recipeKey);
+
     setRecipes((prevRecipes: RecipeListObj) => {
       return {
         ...prevRecipes,
