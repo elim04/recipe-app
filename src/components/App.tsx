@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
 
@@ -25,13 +25,16 @@ const App: React.FC = () => {
         [recipeKey]: recipe,
       };
     });
-    console.log(recipes);
   };
 
   const deleteRecipe = (recipeID: number) => {
     let { [recipeID]: omit, ...res } = recipes;
     setRecipes(res);
   };
+
+  useEffect(() => {
+    console.log("recipe added");
+  }, [recipes]);
 
   return (
     <Router>
