@@ -1,5 +1,6 @@
 import { Ingredient } from "../../recipe.model";
 import { makeStyles } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 
 import {
   Table,
@@ -30,7 +31,7 @@ const IngredientsSection: React.FC<IngredientsProps> = ({
 
   return (
     <>
-      <h2>Ingredients</h2>
+      <Typography variant="h5">Ingredients</Typography>
       <TableContainer>
         <Table className={classes.table}>
           <TableHead>
