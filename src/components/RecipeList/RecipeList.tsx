@@ -1,4 +1,5 @@
 import React from "react";
+import "./RecipeList.css";
 import RecipeListItem from "./RecipeListItem";
 import { RecipeListObj } from "../../recipeList.model";
 import { makeStyles } from "@material-ui/core";
@@ -29,7 +30,7 @@ const RecipeList: React.FC<RecipeListProps> = ({
 
   const recipesArray = Object.keys(recipesData);
   return (
-    <div>
+    <div className="container">
       {recipesArray.map((recipeItem) => {
         //convert string to number for recipedata id to search for right recipe
         let recipeItemId = parseInt(recipeItem, 10);
