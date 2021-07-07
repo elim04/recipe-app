@@ -1,4 +1,5 @@
 import { List, ListItem } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 interface InstructionsProps {
   instructionsData: string[];
 }
@@ -13,7 +14,7 @@ const InstructionsSection: React.FC<InstructionsProps> = ({
 
   return (
     <div>
-      <h2>Instructions</h2>
+      <Typography variant="h5">Instructions</Typography>
       <List>{instructionsRows}</List>
     </div>
   );
