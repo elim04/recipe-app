@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button } from "@material-ui/core";
 
 import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
 
@@ -45,7 +46,7 @@ const App: React.FC = () => {
             <div>
               <h3>Add new recipe!</h3>
               <Link to="/newrecipe">
-                <button>Add Recipe</button>
+                <Button>Add Recipe</Button>
               </Link>
             </div>
           </Route>
