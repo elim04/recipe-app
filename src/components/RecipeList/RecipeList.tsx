@@ -1,6 +1,6 @@
 import React from "react";
 import RecipeListItem from "./RecipeListItem";
-import { RecipeListObj } from "../recipeList.model";
+import { RecipeListObj } from "../../recipeList.model";
 import { makeStyles } from "@material-ui/core";
 import { Card, CardContent, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
@@ -14,7 +14,6 @@ interface RecipeListProps {
 const useStyles = makeStyles({
   root: {
     width: 275,
-    margin: 10,
     backgroundColor: "rgb(221 227 255 / 87%)",
   },
   button: {

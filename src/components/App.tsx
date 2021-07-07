@@ -3,7 +3,7 @@ import { Button } from "@material-ui/core";
 
 import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
 import NavBar from "./NavBar/NavBar";
-import RecipeList from "./RecipeList";
+import RecipeList from "./RecipeList/RecipeList";
 import NewRecipe from "./NewRecipe/NewRecipe";
 import RecipeCard from "./RecipeCard/RecipeCard";
 import { Recipe } from "../recipe.model";
