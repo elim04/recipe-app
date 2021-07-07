@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 
 import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
-
+import NavBar from "./NavBar/NavBar";
 import RecipeList from "./RecipeList";
 import NewRecipe from "./NewRecipe/NewRecipe";
 import RecipeCard from "./RecipeCard/RecipeCard";
@@ -40,6 +40,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="App">
+        <NavBar />
         <Switch>
           <Route exact path="/">
             <RecipeList recipesData={recipes} deleteRecipe={deleteRecipe} />
