@@ -1,5 +1,5 @@
 import { List, ListItem } from "@material-ui/core";
-
+import { Typography } from "@material-ui/core";
 interface CookwareProps {
   cookwareData: string[];
 }
@@ -10,7 +10,7 @@ const CookwareSection: React.FC<CookwareProps> = ({ cookwareData }) => {
   });
   return (
     <div>
-      <h2>Cookware Required</h2>
+      <Typography variant="h5">Cookware Required</Typography>
       <List className="cookware-list">{cookwareRows}</List>
     </div>
   );
