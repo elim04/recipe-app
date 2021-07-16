@@ -77,6 +77,7 @@ const Form: React.FC<FormProps> = ({ onAddRecipe }) => {
       ingredients: data.ingredient,
       instructions: parsedinstructions,
     };
+    console.log(data);
 
     onAddRecipe(recipeToAdd);
 
