@@ -8,6 +8,9 @@ Users can view individual recipes in detail or all of them (less details) on the
 ## Features to implement:
 
 Add User Authentication - so each user can have their own library of recipes
+
 Add a backend database for persistent storage
+
 Add use of an API for practice
+
 Add Redux on individual recipe view page to view separate components of the recipe at a time (ingredients, instructions, cookware) for practice
