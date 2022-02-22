@@ -36,10 +36,17 @@ app.use((err, req, res, next) => {
 // Router object
 // A router object is an isolated instance of middleware and routes
 
+// req object - testing with params
+router.get("/ingredients/:category", (req, res, next) => {
+  console.log(req.params);
+  res.send(`the req param is: ${req.params.category}`);
+});
+
 router.get("/ingredients", (req, res, next) => {
   res.send("You are in the ingredients path");
 });
 
+// So you can pass this specific router to /recipes/* to use?
 app.use("/recipes", router);
 
 const PORT = process.env.PORT || 8080;
