@@ -8,4 +8,16 @@ const findRecipeById = (recipeID, recipeData) => {
   }
 };
 
-module.exports = { findRecipeById };
+const findIngredientById = (ingredientID, ingredientData) => {
+  const foundIngredient = ingredientData.find(
+    (ingredient) => ingredient["id"] === ingredientID
+  );
+
+  if (foundIngredient) {
+    return foundIngredient;
+  } else {
+    throw new Error("No ingredient found");
+  }
+};
+
+module.exports = { findRecipeById, findIngredientById };

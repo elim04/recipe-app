@@ -10,10 +10,12 @@ app.use(cors());
 // Routes
 
 // Recipes
-const recipeRoutes = require("./routes/recipes");
-app.use("/api/recipes", recipeRoutes);
+const recipeRouter = require("./routes/recipes");
+app.use("/api/recipes", recipeRouter);
 
 // Ingredients
+const ingredientRouter = require("./routes/ingredients");
+app.use("/api/ingredients", ingredientRouter);
 
 app.listen(PORT);
 console.log(`Listening on port ${PORT}`);

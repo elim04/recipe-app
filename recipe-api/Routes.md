@@ -9,7 +9,7 @@ GET /api/recipes/:allergen_id
 
 Ingredients
 
-GET /api/ingredients[?dietary_restriction_id]
+GET /api/ingredients[?dietary_restriction_id] // query param
 POST /api/ingredients
 GET /api/ingredients/:ingredient_id
 
