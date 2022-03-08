@@ -1,10 +1,15 @@
 const findRecipeById = (recipeID, recipeData) => {
+  let foundRecipe;
   for (let recipe of recipeData) {
     if (recipe.recipe_id === recipeID) {
-      return recipe;
-    } else {
-      throw new Error("No recipe found");
+      foundRecipe = recipe;
     }
+  }
+
+  if (foundRecipe) {
+    return foundRecipe;
+  } else {
+    throw new Error("No recipe found");
   }
 };
 

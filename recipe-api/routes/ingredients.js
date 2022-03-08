@@ -28,6 +28,8 @@ router.get("/:ingredient_id", (req, res) => {
   }
 });
 
-// GET all ingredients with dietary restriction
-
 module.exports = router;
+
+// Questions
+// How would i utilize query parms to get the ingredients with dietary restrictions
+// How do i change my route
