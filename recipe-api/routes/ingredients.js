@@ -1,35 +1,31 @@
 const express = require("express");
 const router = express.Router();
-const { findIngredientById } = require("../testData/dbHelpers");
-
-// Test Data for API setup
-const ingredientData = require("../testData/ingredientsData");
-const dietaryRestrictionData = require("../testData/dietaryRestrictions");
+const { findIngredientById, getAllIngredients } = require("../testData/db");
 
 // GET all ingredients
 router.get("/", (req, res) => {
-  res.send(ingredientData);
+  const allIngredients = getAllIngredients();
+  res.send(allIngredients);
+
+  // examine request to get query string arguments
+  // req.query --> what does it return single value or array
 });
 
 // GET specific ingredients
 router.get("/:ingredient_id", (req, res) => {
+  // get request params
   const { ingredient_id } = req.params;
-  const ingredientDataToSearch = ingredientData;
+  // use helper fn to find ingredient
+  const foundIngredient = findIngredientById(ingredient_id);
 
-  const foundIngredient = findIngredientById(
-    ingredient_id,
-    ingredientDataToSearch
-  );
-
+  // change to error middleware fn
   if (foundIngredient) {
     res.send(foundIngredient);
   } else {
-    res.status(500).json({ error: err.message });
+    res.status(404).json({ error: err.message });
   }
 });
 
 module.exports = router;
 
-// Questions
-// How would i utilize query parms to get the ingredients with dietary restrictions
-// How do i change my route
+// remove data
