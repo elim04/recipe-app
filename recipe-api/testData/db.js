@@ -46,11 +46,31 @@ const findIngredientById = (ingredientID) => {
   }
 };
 
+// find dietary restriction id
+
+const findDietaryRestrictionID = (dietaryRestriction) => {
+  console.log("in findDietaryRestrictionId fn", dietaryRestriction);
+  const foundDietaryRestrictionID = dietaryRestrictionData.filter(
+    (restriction) => restriction.name === dietaryRestriction
+  );
+  console.log("infindDRestriction fn 2", foundDietaryRestrictionID);
+  return foundDietaryRestrictionID;
+};
+
+const filterByDietaryRestriction = (dietaryRestriction) => {
+  const dietaryRestrictionId = findDietaryRestrictionID(dietaryRestriction);
+
+  const filteredIngredients = ingredientData.filter(
+    (ingredient) => ingredient.id === dietaryRestrictionId
+  );
+
+  return filteredIngredients;
+};
+
 module.exports = {
   findRecipeById,
   findIngredientById,
   getAllIngredients,
   getAllRecipes,
+  filterByDietaryRestriction,
 };
-
-// change to ingredient model, import testData directly

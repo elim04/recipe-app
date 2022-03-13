@@ -1,11 +1,25 @@
 const express = require("express");
 const router = express.Router();
-const { findIngredientById, getAllIngredients } = require("../testData/db");
+const {
+  findIngredientById,
+  getAllIngredients,
+  filterByDietaryRestriction,
+} = require("../testData/db");
 
 // GET all ingredients
 router.get("/", (req, res) => {
   const allIngredients = getAllIngredients();
   res.send(allIngredients);
+
+  // filter for query params on dietary restrictions and filter based on that response
+  // return is an object with key pair value ie. {dietary_restriction: vegan}
+  const dietaryQuery = req.query;
+
+  if (dietaryQuery["dietary_restriction"]) {
+    console.log("test query here", dietaryQuery);
+    const filteredList = filterByDietaryRestriction(dietaryQuery);
+    console.log("filtered list:", filteredList);
+  }
 
   // examine request to get query string arguments
   // req.query --> what does it return single value or array
