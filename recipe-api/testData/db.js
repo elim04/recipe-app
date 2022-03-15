@@ -32,6 +32,16 @@ const getAllIngredients = () => {
   return ingredientData;
 };
 
+/**
+ *
+ * @param {*} filters
+ * @returns
+ */
+const getIngredients = (filters = {}) => {
+  // import lodash library and filter function
+  return filter(ingredientData, filters);
+};
+
 // typically when you look up by id, it exists.
 
 const findIngredientById = (ingredientID) => {
@@ -46,26 +56,29 @@ const findIngredientById = (ingredientID) => {
   }
 };
 
-// find dietary restriction id
+// No longer required as using lodash above
 
-const findDietaryRestrictionID = (dietaryRestriction) => {
-  console.log("in findDietaryRestrictionId fn", dietaryRestriction);
-  const foundDietaryRestrictionID = dietaryRestrictionData.filter(
-    (restriction) => restriction.name === dietaryRestriction
-  );
-  console.log("infindDRestriction fn 2", foundDietaryRestrictionID);
-  return foundDietaryRestrictionID;
-};
+// // find dietary restriction id
 
-const filterByDietaryRestriction = (dietaryRestriction) => {
-  const dietaryRestrictionId = findDietaryRestrictionID(dietaryRestriction);
+// const findDietaryRestrictionID = (dietaryRestriction) => {
+//   const dietaryRestrictionToNum = Number(dietaryRestriction);
+//   const foundDietaryRestrictionID = dietaryRestrictionData.filter(
+//     (restriction) => restriction.id === dietaryRestrictionToNum
+//   );
 
-  const filteredIngredients = ingredientData.filter(
-    (ingredient) => ingredient.id === dietaryRestrictionId
-  );
+//   return foundDietaryRestrictionID;
+// };
 
-  return filteredIngredients;
-};
+// const filterByDietaryRestriction = (dietaryRestriction) => {
+//   // get the dietary restriction object
+//   const dietaryRestrictionId = findDietaryRestrictionID(dietaryRestriction);
+//   // filter based on found dietary restriction id
+//   const filteredIngredients = ingredientData.filter(
+//     (ingredient) =>
+//       ingredient["dietary_restriction_id"] === dietaryRestrictionId[0]["id"]
+//   );
+//   return filteredIngredients;
+// };
 
 module.exports = {
   findRecipeById,

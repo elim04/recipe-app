@@ -1,3 +1,4 @@
+const { NOTFOUND } = require("dns");
 const express = require("express");
 const router = express.Router();
 const {
@@ -9,24 +10,26 @@ const {
 // GET all ingredients
 router.get("/", (req, res) => {
   const allIngredients = getAllIngredients();
-  res.send(allIngredients);
 
   // filter for query params on dietary restrictions and filter based on that response
   // return is an object with key pair value ie. {dietary_restriction: vegan}
   const dietaryQuery = req.query;
+  const filters = {};
+  // const ingredientList = getIngredients();
 
   if (dietaryQuery["dietary_restriction"]) {
-    console.log("test query here", dietaryQuery);
-    const filteredList = filterByDietaryRestriction(dietaryQuery);
-    console.log("filtered list:", filteredList);
+    filters.dietary_restriction_id = Number(
+      dietaryQuery["dietary_restriction"]
+    );
   }
 
-  // examine request to get query string arguments
-  // req.query --> what does it return single value or array
+  res.json(getIngredients(filters));
 });
 
+// pagination look up
+
 // GET specific ingredients
-router.get("/:ingredient_id", (req, res) => {
+router.get("/:ingredient_id", (req, res, next) => {
   // get request params
   const { ingredient_id } = req.params;
   // use helper fn to find ingredient
@@ -35,8 +38,9 @@ router.get("/:ingredient_id", (req, res) => {
   // change to error middleware fn
   if (foundIngredient) {
     res.send(foundIngredient);
-  } else {
-    res.status(404).json({ error: err.message });
+  } else if (err) {
+    // send the error here
+    next(new Error("Not found"));
   }
 });
 
