@@ -5,12 +5,11 @@ const {
   findIngredientById,
   getAllIngredients,
   filterByDietaryRestriction,
+  getIngredients,
 } = require("../testData/db");
 
 // GET all ingredients
 router.get("/", (req, res) => {
-  const allIngredients = getAllIngredients();
-
   // filter for query params on dietary restrictions and filter based on that response
   // return is an object with key pair value ie. {dietary_restriction: vegan}
   const dietaryQuery = req.query;

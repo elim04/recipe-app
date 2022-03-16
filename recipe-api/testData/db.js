@@ -1,3 +1,5 @@
+const _ = require("lodash");
+
 // Test Data for API setup
 const ingredientData = require("./ingredientsData");
 const dietaryRestrictionData = require("./dietaryRestrictions");
@@ -35,11 +37,11 @@ const getAllIngredients = () => {
 /**
  *
  * @param {*} filters
- * @returns
+ * @returns filtered list of ingredients if filter is present
  */
 const getIngredients = (filters = {}) => {
   // import lodash library and filter function
-  return filter(ingredientData, filters);
+  return _.filter(ingredientData, filters);
 };
 
 // typically when you look up by id, it exists.
@@ -86,4 +88,5 @@ module.exports = {
   getAllIngredients,
   getAllRecipes,
   filterByDietaryRestriction,
+  getIngredients,
 };
