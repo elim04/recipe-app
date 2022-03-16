@@ -1,12 +1,6 @@
-const { NOTFOUND } = require("dns");
 const express = require("express");
 const router = express.Router();
-const {
-  findIngredientById,
-  getAllIngredients,
-  filterByDietaryRestriction,
-  getIngredients,
-} = require("../testData/db");
+const { findIngredientById, getIngredients } = require("../testData/db");
 
 // GET all ingredients
 router.get("/", (req, res) => {

@@ -4,10 +4,10 @@ const { findRecipeById, getAllRecipes } = require("../testData/db");
 
 router.get("/", (req, res, next) => {
   const allRecipes = getAllRecipes();
-  res.send(allRecipes);
+  res.json(allRecipes);
 
   if (err) {
-    next(res.status(404).json({ error: err.message }));
+    next(new Error("Not found"));
   }
 });
 
@@ -16,9 +16,9 @@ router.get("/:recipe_id", (req, res, next) => {
   const foundRecipe = findRecipeById(recipe_id);
 
   if (foundRecipe) {
-    res.send(foundRecipe);
+    res.json(foundRecipe);
   } else if (err) {
-    next(res.status(404).json({ error: err.message }));
+    next(new Error("Not found"));
   }
 });
 
