@@ -54,6 +54,5 @@ module.exports = {
   findIngredientById,
   getAllIngredients,
   getAllRecipes,
-  filterByDietaryRestriction,
   getIngredients,
 };

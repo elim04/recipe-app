@@ -16,6 +16,10 @@ router.get("/", (req, res) => {
     );
   }
 
+  if (dietaryQuery["vegan"]) {
+    filters.vegan = true;
+  }
+
   res.json(getIngredients(filters));
 });
 
