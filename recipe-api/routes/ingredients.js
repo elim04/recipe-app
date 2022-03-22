@@ -23,8 +23,6 @@ router.get("/", (req, res) => {
   res.json(getIngredients(filters));
 });
 
-// pagination look up
-
 // GET specific ingredients
 router.get("/:ingredient_id", (req, res, next) => {
   // get request params
@@ -34,7 +32,7 @@ router.get("/:ingredient_id", (req, res, next) => {
 
   // change to error middleware fn
   if (foundIngredient) {
-    res.send(foundIngredient);
+    res.json(foundIngredient);
   } else if (err) {
     // send the error here
     next(new Error("Not found"));
@@ -42,5 +40,3 @@ router.get("/:ingredient_id", (req, res, next) => {
 });
 
 module.exports = router;
-
-// remove data

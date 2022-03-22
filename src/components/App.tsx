@@ -13,6 +13,7 @@ import "./App.css";
 
 //test data
 import { data } from "../testdata";
+import axios from "axios";
 
 const App: React.FC = () => {
   const [recipes, setRecipes] = useState<RecipeListObj>(data);
@@ -34,7 +35,9 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log("recipe added");
+    axios.get("/api/recipes").then((recipeData) => {
+      console.log(recipes);
+    });
   }, [recipes]);
 
   return (

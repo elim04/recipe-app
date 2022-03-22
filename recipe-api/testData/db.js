@@ -7,46 +7,46 @@ const recipeData = require("./recipes");
 
 // Recipe Helpers
 
-const getAllRecipes = () => {
-  return recipeData;
+const getAllRecipes = async () => {
+  return await recipeData;
 };
 
-const findRecipeById = (recipeID) => {
+const findRecipeById = async (recipeID) => {
   let foundRecipe;
   for (let recipe of recipeData) {
     if (recipe.recipe_id === recipeID) {
       foundRecipe = recipe;
     }
   }
-  return foundRecipe;
+  return await foundRecipe;
 };
 
 // make an async function, callback, instead of returning value. resolve promise/provide callback
 
 // Ingredient Helpers
 
-const getAllIngredients = () => {
-  return ingredientData;
+const getAllIngredients = async () => {
+  return await ingredientData;
 };
 
 /**
  *
  * @param {*} filters
- * @returns filtered list of ingredients if filter is present
+ * @returns {Promise<array>}filtered list of ingredients if filter is present
  */
-const getIngredients = (filters = {}) => {
+const getIngredients = async (filters = {}) => {
   // import lodash library and filter function
-  return _.filter(ingredientData, filters);
+  return await _.filter(ingredientData, filters);
 };
 
 // typically when you look up by id, it exists.
 
-const findIngredientById = (ingredientID) => {
+const findIngredientById = async (ingredientID) => {
   const foundIngredient = ingredientData.find(
     (ingredient) => ingredient["id"] === ingredientID
   );
 
-  return foundIngredient;
+  return await foundIngredient;
 };
 
 module.exports = {
