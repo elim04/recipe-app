@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { findIngredientById, getIngredients } = require("../testData/db");
+const { findIngredientById, getIngredients } = require("../testData/dbHelpers");
+const { main } = require("../db");
 
 // GET all ingredients
 router.get("/", (req, res) => {

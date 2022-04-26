@@ -1,39 +1,55 @@
 const process = require("process");
 const express = require("express");
 const cors = require("cors");
+const mongodb = require("mongodb");
+const ObjectId = mongodb.ObjectId;
 const PORT = process.env.PORT || 8080;
 
-// app object setup
-const app = express();
-app.use(cors());
-// Routes
+// Mongodb setup
+const { getDatabase } = require("./db");
 
-// Recipes
-// const recipeRouter = require("./routes/recipes");
-app.use("/api/recipes", require("./routes/recipes"));
+async function main() {
+  const db = await getDatabase();
+  const recipe = await db.collection("recipes").findOne({
+    _id: ObjectId("625dc5731d02fa0dc785e6a4"),
+  });
 
-// Ingredients
-app.use("/api/ingredients", require("./routes/ingredients"));
+  console.log(recipe);
 
-// what happens when there is a null error object/response - look into docs
+  // app object setup
+  const app = express();
+  app.use(cors());
+  // Routes
 
-// according to docs you define error-handling middleware last, after other app.use() and route calls
-app.use((err, req, res, next) => {
-  if (err.message === "Not found") {
-    res.status(404);
-  }
+  // Recipes
+  // const recipeRouter = require("./routes/recipes");
+  app.use("/api/recipes", require("./routes/recipes"));
 
-  if (err.message === "Forbidden") {
-    res.status(403);
-  }
+  // Ingredients
+  app.use("/api/ingredients", require("./routes/ingredients"));
 
-  if (err.message === "Internal Server Error") {
-    res.status(500);
-  }
-});
+  // what happens when there is a null error object/response - look into docs
 
-app.listen(PORT);
-console.log(`Listening on port ${PORT}`);
+  // according to docs you define error-handling middleware last, after other app.use() and route calls
+  app.use((err, req, res, next) => {
+    if (err.message === "Not found") {
+      res.status(404);
+    }
+
+    if (err.message === "Forbidden") {
+      res.status(403);
+    }
+
+    if (err.message === "Internal Server Error") {
+      res.status(500);
+    }
+  });
+
+  app.listen(PORT);
+  console.log(`Listening on port ${PORT}`);
+}
+
+main();
 
 // add new app.use for middleware
 // handle error in middleware fn

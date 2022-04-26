@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { findRecipeById, getAllRecipes } = require("../testData/db");
+const { findRecipeById, getAllRecipes } = require("../testData/dbHelpers");
 
 router.get("/", (req, res, next) => {
   const allRecipes = getAllRecipes();
@@ -23,10 +23,3 @@ router.get("/:recipe_id", (req, res, next) => {
 });
 
 module.exports = router;
-
-// Comments
-// things to look into
-// koa - check out
-// nest or next ?
-
-// utilize next param. middleware error handling
