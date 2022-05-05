@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { findRecipeById, getAllRecipes } = require("../testData/dbHelpers");
+const { findRecipeById, getAllRecipes } = require("../fixtures/recipes");
+
+// GET
 
 router.get("/", (req, res, next) => {
   const allRecipes = getAllRecipes();
@@ -22,4 +24,6 @@ router.get("/:recipe_id", (req, res, next) => {
   }
 });
 
-module.exports = router;
+// POST
+
+router.module.exports = router;
