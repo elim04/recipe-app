@@ -10,11 +10,11 @@ const { getDatabase } = require("./db");
 
 async function main() {
   const db = await getDatabase();
-  const recipe = await db.collection("recipes").findOne({
-    _id: ObjectId("625dc5731d02fa0dc785e6a4"),
-  });
+  // const recipe = await db.collection("recipes").findOne({
+  //   _id: ObjectId("625dc5731d02fa0dc785e6a4"),
+  // });
 
-  console.log(recipe);
+  // console.log(recipe);
 
   // app object setup
   const app = express();
@@ -22,7 +22,6 @@ async function main() {
   // Routes
 
   // Recipes
-  // const recipeRouter = require("./routes/recipes");
   app.use("/api/recipes", require("./routes/recipes"));
 
   // Ingredients

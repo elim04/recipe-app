@@ -1,15 +1,32 @@
 const express = require("express");
 const router = express.Router();
-const { findRecipeById, getAllRecipes } = require("../fixtures/recipes");
+const {
+  findRecipeById,
+  getAllRecipes,
+  addNewRecipe,
+} = require("../fixtures/recipes");
 
 // GET
 
 router.get("/", (req, res, next) => {
-  const allRecipes = getAllRecipes();
-  res.json(allRecipes);
+  getAllRecipes().then((recipeData) => {
+    res.json(recipeData);
+  });
 
   if (err) {
     next(new Error("Not found"));
+  }
+});
+
+router.post("/:recipe_id", (req, res, next) => {
+  const recipeData = req.body;
+
+  const newRecipe = addNewRecipe(recipeData);
+
+  if (newRecipe) {
+    res.status(201).json(newRecipe);
+  } else {
+    next(new Error("Internal Server Error"));
   }
 });
 
@@ -24,6 +41,4 @@ router.get("/:recipe_id", (req, res, next) => {
   }
 });
 
-// POST
-
-router.module.exports = router;
+module.exports = router;

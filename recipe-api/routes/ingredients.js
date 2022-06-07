@@ -3,8 +3,8 @@ const router = express.Router();
 const {
   findIngredientById,
   getIngredients,
+  createNewIngredient,
 } = require("../fixtures/ingredients");
-const { main } = require("../db");
 
 // GET all ingredients
 router.get("/", (req, res) => {
@@ -27,6 +27,20 @@ router.get("/", (req, res) => {
   res.json(getIngredients(filters));
 });
 
+// POST add new ingredient
+
+router.post("/", (req, res, next) => {
+  const ingredientData = req.body;
+
+  const newIngredient = createNewIngredient(ingredientData);
+
+  if (newIngredient) {
+    res.status(201).json(newIngredient);
+  } else {
+    next(new Error("Internal Server Error"));
+  }
+});
+
 // GET specific ingredients
 router.get("/:ingredient_id", (req, res, next) => {
   // get request params
@@ -44,3 +58,6 @@ router.get("/:ingredient_id", (req, res, next) => {
 });
 
 module.exports = router;
+
+// integrate with google/facebook signin ? authenticate
+// short term solution --> hardcode pregenerated web token that identifies you and store in browser
