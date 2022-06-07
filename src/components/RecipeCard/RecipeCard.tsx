@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import Cookware from "./CookwareSection";
 import InstructionsSection from "./InstructionsSection";
 import IngredientsSection from "./IngredientsSection";
-import { RecipeListObj } from "../../recipeList.model";
+import { RecipeListArray } from "../../recipeList.model";
 import { Recipe } from "../../recipe.model";
 import { Typography } from "@material-ui/core";
 interface RecipeCardProps {
-  recipesData: RecipeListObj;
+  recipesData: RecipeListArray;
 }
 
 interface ParamTypes {

@@ -7,26 +7,23 @@ import RecipeList from "./RecipeList/RecipeList";
 import NewRecipe from "./NewRecipe/NewRecipe";
 import RecipeCard from "./RecipeCard/RecipeCard";
 import { Recipe } from "../recipe.model";
-import { RecipeListObj } from "../recipeList.model";
+import { RecipeListArray } from "../recipeList.model";
 
 import "./App.css";
 
-//test data
-import { data } from "../testdata";
 import axios from "axios";
 
 const App: React.FC = () => {
-  const [recipes, setRecipes] = useState<RecipeListObj>(data);
+  const [recipes, setRecipes] = useState<RecipeListArray>([]);
 
   const onAddRecipe = (recipe: Recipe) => {
     let recipeKey = Math.floor(Math.random() * 10000);
 
-    setRecipes((prevRecipes: RecipeListObj) => {
-      return {
-        ...prevRecipes,
-        [recipeKey]: recipe,
-      };
+    setRecipes((prevRecipes: RecipeListArray) => {
+      return [...prevRecipes, recipe];
     });
+
+    // need to do axios request here.
   };
 
   const deleteRecipe = (recipeID: number) => {
@@ -35,10 +32,11 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    axios.get("/api/recipes").then((recipeData) => {
-      console.log(recipes);
+    axios.get("/api/recipes").then((res) => {
+      console.log("recipes from api here", res.data);
+      setRecipes(res.data);
     });
-  }, [recipes]);
+  }, [setRecipes]);
 
   return (
     <Router>
