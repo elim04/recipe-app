@@ -38,7 +38,6 @@ app.use((err, req, res, next) => {
 
 // req object - testing with params
 router.get("/ingredients/:category", (req, res, next) => {
-  console.log(req.params);
   res.send(`the req param is: ${req.params.category}`);
 });
 
