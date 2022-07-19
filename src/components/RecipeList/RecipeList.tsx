@@ -4,12 +4,15 @@ import RecipeListItem from "./RecipeListItem";
 import { RecipeListArray } from "../../recipeList.model";
 import { makeStyles } from "@material-ui/core";
 import { Card, CardContent, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Recipe } from "../../recipe.model";
 
 //describes props for this component
 interface RecipeListProps {
   recipesData: RecipeListArray;
   deleteRecipe: (recipe: number) => void;
+  setRecipe: (recipe: Recipe) => void;
+  currentRecipe: Recipe | undefined;
 }
 
 const useStyles = makeStyles({
@@ -25,41 +28,44 @@ const useStyles = makeStyles({
 const RecipeList: React.FC<RecipeListProps> = ({
   recipesData,
   deleteRecipe,
+  setRecipe,
+  currentRecipe,
 }) => {
   const classes = useStyles();
 
-  const recipesArray = Object.keys(recipesData);
+  const getRecipe = (recipe_id: string) => {
+    axios.get(`/api/recipes/${recipe_id}`).then((res) => {
+      console.log("get recipe data here", res.data);
+      setRecipe(res.data);
+    });
+  };
+
   return (
     <div className="container">
-      {recipesArray.map((recipeItem) => {
-        //convert string to number for recipedata id to search for right recipe
-        let recipeItemId = parseInt(recipeItem, 10);
-
+      {recipesData.map((recipeItem, i) => {
         return (
-          <Card key={recipeItemId} className={classes.root}>
+          <Card key={i} className={classes.root}>
             <CardContent>
               <RecipeListItem
-                key={recipeItemId}
-                recipeName={recipesData[recipeItemId]["name"]}
-                servingSize={recipesData[recipeItemId]["servingSize"]}
+                recipeName={recipeItem["name"]}
+                servingSize={recipeItem["servingSize"]}
               />
               <Button
                 className={classes.button}
                 variant="outlined"
                 size="small"
-                onClick={deleteRecipe.bind(null, recipeItemId)}
+                // onClick={deleteRecipe.bind(null, recipeItem)}
               >
                 Delete
               </Button>
-              <Link to={`/recipe/${recipeItemId}`}>
-                <Button
-                  className={classes.button}
-                  variant="outlined"
-                  size="small"
-                >
-                  View
-                </Button>
-              </Link>
+              <Button
+                className={classes.button}
+                variant="outlined"
+                size="small"
+                onClick={() => getRecipe(recipeItem._id)}
+              >
+                View
+              </Button>
             </CardContent>
           </Card>
         );

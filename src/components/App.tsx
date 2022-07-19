@@ -15,6 +15,7 @@ import axios from "axios";
 
 const App: React.FC = () => {
   const [recipes, setRecipes] = useState<RecipeListArray>([]);
+  const [currentRecipe, setCurrentRecipe] = useState<Recipe | undefined>();
 
   const onAddRecipe = (recipe: Recipe) => {
     let recipeKey = Math.floor(Math.random() * 10000);
@@ -23,7 +24,9 @@ const App: React.FC = () => {
       return [...prevRecipes, recipe];
     });
 
-    // need to do axios request here.
+    axios
+      .post("/api/recipes", { recipe })
+      .then((res) => console.log("from axios", res));
   };
 
   const deleteRecipe = (recipeID: number) => {
@@ -33,7 +36,6 @@ const App: React.FC = () => {
 
   useEffect(() => {
     axios.get("/api/recipes").then((res) => {
-      console.log("recipes from api here", res.data);
       setRecipes(res.data);
     });
   }, [setRecipes]);
@@ -44,7 +46,12 @@ const App: React.FC = () => {
         <NavBar />
         <Switch>
           <Route exact path="/">
-            <RecipeList recipesData={recipes} deleteRecipe={deleteRecipe} />
+            <RecipeList
+              recipesData={recipes}
+              deleteRecipe={deleteRecipe}
+              setRecipe={setCurrentRecipe}
+              currentRecipe={currentRecipe}
+            />
             <div>
               <h3>Add new recipe!</h3>
               <Link to="/newrecipe">
@@ -56,7 +63,7 @@ const App: React.FC = () => {
             <NewRecipe onAddRecipe={onAddRecipe} />
           </Route>
           <Route path="/recipe/:recipe_id">
-            <RecipeCard recipesData={recipes} />
+            {currentRecipe && <RecipeCard recipeData={currentRecipe} />}
           </Route>
         </Switch>
       </div>

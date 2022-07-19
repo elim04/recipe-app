@@ -71,13 +71,14 @@ const Form: React.FC<FormProps> = ({ onAddRecipe }) => {
     );
 
     const recipeToAdd = {
+      _id: "",
       name: data.name,
       servingSize: data.servingSize,
       cookware: parsedCookware,
       ingredients: data.ingredient,
       instructions: parsedinstructions,
     };
-    console.log(data);
+    console.log("form data here:", data);
 
     onAddRecipe(recipeToAdd);
 
