@@ -1,6 +1,7 @@
 const process = require("process");
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const mongodb = require("mongodb");
 const ObjectId = mongodb.ObjectId;
 const PORT = process.env.PORT || 8080;
@@ -10,15 +11,11 @@ const { getDatabase } = require("./db");
 
 async function main() {
   const db = await getDatabase();
-  // const recipe = await db.collection("recipes").findOne({
-  //   _id: ObjectId("625dc5731d02fa0dc785e6a4"),
-  // });
-
-  // console.log(recipe);
 
   // app object setup
   const app = express();
   app.use(cors());
+  app.use(bodyParser.json());
   // Routes
 
   // Recipes

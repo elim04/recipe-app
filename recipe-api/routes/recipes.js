@@ -18,8 +18,8 @@ router.get("/", (req, res, next) => {
   }
 });
 
-router.post("/:recipe_id", (req, res, next) => {
-  const recipeData = req.body;
+router.post("/", (req, res, next) => {
+  const { recipe: recipeData } = req.body;
 
   const newRecipe = addNewRecipe(recipeData);
 
@@ -42,3 +42,4 @@ router.get("/:recipe_id", (req, res, next) => {
 });
 
 module.exports = router;
+``;
