@@ -1,5 +1,6 @@
 // Mongodb setup
 const { getDatabase } = require("../db");
+const ObjectId = require("mongodb").ObjectId;
 // Recipe Helpers
 
 const getAllRecipes = async () => {
@@ -10,7 +11,10 @@ const getAllRecipes = async () => {
 
 const findRecipeById = async (recipeID) => {
   const db = await getDatabase();
-  return await db.collection("recipes").find({ recipe_id: recipeID });
+  const recipe = await db
+    .collection("recipes")
+    .findOne({ _id: ObjectId(recipeID) });
+  return recipe;
 };
 
 const addNewRecipe = async (recipeData) => {

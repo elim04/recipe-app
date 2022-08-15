@@ -32,14 +32,13 @@ router.post("/", (req, res, next) => {
 
 router.get("/:recipe_id", (req, res, next) => {
   const { recipe_id } = req.params;
-  const foundRecipe = findRecipeById(recipe_id);
-
-  if (foundRecipe) {
-    res.json(foundRecipe);
-  } else if (err) {
-    next(new Error("Not found"));
-  }
+  findRecipeById(recipe_id)
+    .then((foundRecipe) => {
+      res.json(foundRecipe);
+    })
+    .catch((err) => {
+      next(new Error("Not found"));
+    });
 });
 
 module.exports = router;
-``;
