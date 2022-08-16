@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core";
 import { Card, CardContent, Button } from "@material-ui/core";
 import axios from "axios";
 import { Recipe } from "../../recipe.model";
-
+import { useHistory } from "react-router-dom";
 //describes props for this component
 interface RecipeListProps {
   recipesData: RecipeListArray;
@@ -32,11 +32,12 @@ const RecipeList: React.FC<RecipeListProps> = ({
   currentRecipe,
 }) => {
   const classes = useStyles();
+  const history = useHistory();
 
   const getRecipe = (recipe_id: string) => {
     axios.get(`/api/recipes/${recipe_id}`).then((res) => {
-      console.log("get recipe data here", res.data);
       setRecipe(res.data);
+      history.push(`/recipe/${recipe_id}`);
     });
   };
 
