@@ -19,8 +19,6 @@ const findRecipeById = async (recipeID) => {
 
 const addNewRecipe = async (recipeData) => {
   const db = await getDatabase();
-
-  console.log("recipe data from add new recipe:", recipeData);
   const recipeToInsert = await db.collection("recipes").insertOne({
     name: recipeData.name,
     servingSize: recipeData.servingSize,
@@ -37,6 +35,11 @@ const addNewRecipe = async (recipeData) => {
   }
 
   return recipe;
+};
+
+const deleteRecipe = async (recipeID) => {
+  const db = await getDatabase();
+  await db.collection("recipes").deleteOne({ _id: ObjectId(recipeID) });
 };
 
 const updateRecipe = async (recipeDataToChange) => {};
