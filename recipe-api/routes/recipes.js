@@ -4,6 +4,7 @@ const {
   findRecipeById,
   getAllRecipes,
   addNewRecipe,
+  deleteRecipe,
 } = require("../fixtures/recipes");
 
 // GET
@@ -41,4 +42,15 @@ router.get("/:recipe_id", (req, res, next) => {
     });
 });
 
+router.delete("/:recipe_id", (req, res, next) => {
+  const { recipe_id } = req.params;
+
+  deleteRecipe(recipe_id)
+    .then((response) => {
+      res.status(201).json(response);
+    })
+    .catch((err) => {
+      next(new Error("Internal Server Error"));
+    });
+});
 module.exports = router;
